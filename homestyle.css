@@ -6,24 +6,60 @@
 body {
   background-color: powderblue;
 }
-
 .sign{
-  float: right;
+  position: absolute;
+  text-decoration: none;
+  top: 30px;
+  right: 16px;
   color: #000000;
   font-size: 17px;
-  padding: 10px 16px;
 }
 
-.sign a:hover {
-  background-color: #ddd;
-  color: white;
+.sign1{
+  position: absolute;
+  text-decoration: none;
+  top: 30px;
+  right: 106px;
+  color: #000000;
+  font-size: 17px;
 }
 
-.sign a.active {
-  background-color: ;
-  color: white;
+.searchbox{
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
 }
 
+ .searchbox input[type=text] {
+  padding: 18px 20px;
+  margin-right: 0;
+  /* margin-top: 1px;
+  font-size: 19px;
+  position: absolute;
+  top: 30px;
+  right: 400px;
+  border: none; */
+  /* border: 1px solid #ccc; */
+}
+
+.searchbutton {
+  /* float: right;
+  position: absolute;
+  top: 24px;
+  right: 380px;
+  margin-top: 8px;
+  margin-right: 6px; */
+  background: #ddd;
+  font-size: 15px;
+  padding: 18px 20px;
+  /* display: block; */
+  border: none;
+  cursor: pointer;
+
+}
+.searchbutton button:hover {
+  background: #ccc;
+}
 .topnav a {
   float: left;
   color: #f2f2f2;
@@ -66,7 +102,7 @@ body {
 /* Top right text */
 .top-right {
   position: absolute;
-  top: 8px;
+  top: 30px;
   right: 16px;
 }
 
@@ -83,4 +119,71 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.search-d{
+  display: flex;
+  flex: 1;
+}
+
+select {
+  appearance: none;
+  background-color: white;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: Verdana;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+.relative {
+  position: absolute;
+  right: 7%;
+  top: 4%;
+
+}
+
+body {
+  background-color:white;
+  font-size: 20px;
+
+  font-family: Verdana;
+}
+
+.interval {
+  position: absolute;
+  top: 30px;
+  right: 16px;
+  color: #000000;
+  font-size: 17px;
+
+  font-family: Verdana;
+}
+
+input[type=text], select {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
 }

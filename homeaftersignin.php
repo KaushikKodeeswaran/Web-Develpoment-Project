@@ -12,8 +12,9 @@
         <button type="submit" class="searchbutton"><i class="fa fa-search" ></i></button>
       <!-- </form> -->
     </div>
-<a class="sign" href="Signup.php">SIGN UP</a>
-<a class="sign1" href="signin.php">SIGN IN</a>
+<?php
+
+ ?>
 </div>
 
 <div class="topnav">
