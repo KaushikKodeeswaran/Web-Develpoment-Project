@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/webdevelopment/css/product.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="top">
+  <div class="image">
+    <img src="/webdevelopment/images/logo.jpeg" alt="logo" height="100" width="250">
+  </div>
+</div >
+<br><br>
+<h2 style="text-align:center">Product / Add Products</h2>
+
+<form action="/webdevelopment/php/products.php" enctype="multipart/form-data" method="post">
+  <div class="imgcontainer">
+    <img src="" class="avatar">
+  </div>
+  <div class="container">
+    <form>
+      <label for="Pname" ><b>Product Name</b></label>
+      <input type="text" id="product" placeholder="Enter Product Name" name="name" required>
+      <label for="pro"><b>Description</b></label>
+      <br><br>
+      <textarea class="desc" rows="4" cols="50" name="description" placeholder="    Enter the Description"  style="margin: 0px; width: 1000px; height: 133px;"></textarea>
+      <br>
+      <label for="PBrand"><b>Brand</b></label>
+      <input type="text" placeholder="Enter the Brand" name="brand" required>
+
+      <label for="Ptype"><b>Product Type</b></label><br>
+      <select  size="1" style="width:300px;height:50px" name="category" id="product">
+        <option value=""></option>
+        <option value="Electronics">Electronics</option>
+        <option value="Sports">Sports</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Home&Furniture">Home & Furniture</option>
+        <option value="Books">Books</option>
+      </select>
+      <br><br>
+      <label for="PPrice"><b>Pricing (in Rs.)</b></label>
+      <input type="text" placeholder="Enter the Price" name="price" required>
+
+
+      <label class="form-label" for="customFile">Add IMG file</label>
+      <input name="image" type="file" class="form-control" id="customFile" />
+      <br><button   name="submit">Add Product</button><br><br>
+      <button type="button" class="cancelbtn">Cancel</button>
+    </form>
+  </div>
+  <script>
+</form>
+</body>
+</html>
