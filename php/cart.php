@@ -1,217 +1,131 @@
-<!--Section: Block Content-->
-<section>
+<?php
 
-  <!--Grid row-->
-  <div class="row">
+session_start();
 
-    <!--Grid column-->
-    <div class="col-lg-8">
+require_once (realpath($_SERVER["DOCUMENT_ROOT"])."/webdevelopment/php/CreateDb.php");
+require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/component.php');
 
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4 wish-list">
 
-          <h5 class="mb-4">Cart (<span>2</span> items)</h5>
+if (isset($_POST['remove'])){
+  if ($_GET['action'] == 'remove'){
+      foreach ($_SESSION['cart'] as $key => $value){
+          if($value["product_id"] == $_GET['id']){
+              unset($_SESSION['cart'][$key]);
+              echo "<script>alert('Product has been Removed...!')</script>";
+              echo "<script>window.location = 'cart.php'</script>";
+          }
+      }
+  }
+}
 
-          <div class="row mb-4">
-            <div class="col-md-5 col-lg-3 col-xl-3">
-              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100"
-                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
-                <a href="#!">
-                  <div class="mask">
-                    <img class="img-fluid w-100"
-                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
-                    <div class="mask rgba-black-slight"></div>
-                  </div>
-                </a>
-              </div>
+
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>Cart</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+<?php
+    require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php');
+?>
+
+<div class="container-fluid">
+    <div class="row px-5">
+        <div class="col-md-7">
+            <div class="shopping-cart">
+                <h6>My Cart</h6>
+                <hr>
+
+                <?php
+
+                $total = 0;
+                    if (isset($_SESSION['cart'])){
+                        $product_id = array_column($_SESSION['cart'],'product_id');
+                        // $db = new CreateDb;
+                        // $result = $db->getData();
+                        $conn = mysqli_connect('127.0.0.1', 'root', '');
+                        if (!$conn) {
+                          die("Connection failed: " . mysqli_connect_error());
+                        }
+
+                        if(!mysqli_select_db($conn,'product_deal_india'))
+                        {
+                          echo "not selected";
+                        }
+                        $sql = "select * from products";
+                        $result = mysqli_query($conn,$sql);
+                        while ($row = mysqli_fetch_array($result)){
+                            foreach ($product_id as $id){
+                                if ($row['ID'] == $id){
+                                  $image = base64_encode($row['IMAGE']);
+                                  $imawge = base64_decode($image);
+                                  $image_src = "/webdevelopment/images/upload/".$imawge;
+                                    cartElement($image_src, $row['NAME'],$row['PRICE'], $row['ID']);
+                                    $total = $total + (int)$row['PRICE'];
+                                }
+                            }
+                        }
+                    }else{
+                        echo "<h5>Cart is Empty</h5>";
+                    }
+
+                ?>
+
             </div>
-            <div class="col-md-7 col-lg-9 col-xl-9">
-              <div>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h5>Blue denim shirt</h5>
-                    <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
-                    <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
-                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
-                  </div>
-                  <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="minus decrease"></button>
-                      <input class="quantity" min="0" name="quantity" value="1" type="number">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="plus increase"></button>
+        </div>
+        <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
+
+            <div class="pt-4">
+                <h6>PRICE DETAILS</h6>
+                <hr>
+                <div class="row price-details">
+                    <div class="col-md-6">
+                        <?php
+                            if (isset($_SESSION['cart'])){
+                                $count  = count($_SESSION['cart']);
+                                echo "<h6>Price ($count items)</h6>";
+                            }else{
+                                echo "<h6>Price (0 items)</h6>";
+                            }
+                        ?>
+                        <h6>Delivery Charges</h6>
+                        <hr>
+                        <h6>Amount Payable</h6>
                     </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                      (Note, 1 piece)
-                    </small>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i> Remove item </a>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
-                        class="fas fa-heart mr-1"></i> Move to wish list </a>
-                  </div>
-                  <p class="mb-0"><span><strong id="summary">$17.99</strong></span></p class="mb-0">
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr class="mb-4">
-          <div class="row mb-4">
-            <div class="col-md-5 col-lg-3 col-xl-3">
-              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100"
-                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg" alt="Sample">
-                <a href="#!">
-                  <div class="mask">
-                    <img class="img-fluid w-100"
-                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg">
-                    <div class="mask rgba-black-slight"></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-7 col-lg-9 col-xl-9">
-              <div>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <h5>Red hoodie</h5>
-                    <p class="mb-3 text-muted text-uppercase small">Shirt - red</p>
-                    <p class="mb-2 text-muted text-uppercase small">Color: red</p>
-                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
-                  </div>
-                  <div>
-                    <div class="def-number-input number-input safari_only mb-0 w-100">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                        class="minus"></button>
-                      <input class="quantity" min="0" name="quantity" value="1" type="number">
-                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                        class="plus"></button>
+                    <div class="col-md-6">
+                        <h6>Rs.<?php echo $total; ?></h6>
+                        <h6 class="text-success">FREE</h6>
+                        <hr>
+                        <h6>Rs.<?php
+                            echo $total;
+                            ?></h6>
                     </div>
-                  </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                        class="fas fa-trash-alt mr-1"></i> Remove item </a>
-                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
-                        class="fas fa-heart mr-1"></i> Move to wish list </a>
-                  </div>
-                  <p class="mb-0"><span><strong>$35.99</strong></span></p class="mb-0">
-                </div>
-              </div>
             </div>
-          </div>
-          <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
-            items to your cart does not mean booking them.</p>
 
         </div>
-      </div>
-      <!-- Card -->
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <h5 class="mb-4">Expected shipping delivery</h5>
-
-          <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
-        </div>
-      </div>
-      <!-- Card -->
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <h5 class="mb-4">We accept</h5>
-
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-            alt="Visa">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-            alt="American Express">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-            alt="Mastercard">
-          <img class="mr-2" width="45px"
-            src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
-            alt="PayPal acceptance mark">
-        </div>
-      </div>
-      <!-- Card -->
-
     </div>
-    <!--Grid column-->
+</div>
 
-    <!--Grid column-->
-    <div class="col-lg-4">
 
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
 
-          <h5 class="mb-3">The total amount of</h5>
-
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-              Temporary amount
-              <span>$25.98</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-              Shipping
-              <span>Gratis</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-              <div>
-                <strong>The total amount of</strong>
-                <strong>
-                  <p class="mb-0">(including VAT)</p>
-                </strong>
-              </div>
-              <span><strong>$53.98</strong></span>
-            </li>
-          </ul>
-
-          <button type="button" class="btn btn-primary btn-block">go to checkout</button>
-
-        </div>
-      </div>
-      <!-- Card -->
-
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4">
-
-          <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample">
-            Add a discount code (optional)
-            <span><i class="fas fa-chevron-down pt-1"></i></span>
-          </a>
-
-          <div class="collapse" id="collapseExample">
-            <div class="mt-3">
-              <div class="md-form md-outline mb-0">
-                <input type="text" id="discount-code" class="form-control font-weight-light"
-                  placeholder="Enter discount code">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card -->
-
-    </div>
-    <!--Grid column-->
-
-  </div>
-  <!-- Grid row -->
-
-</section>
-<!--Section: Block Content-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

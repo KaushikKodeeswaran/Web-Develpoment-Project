@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "127.0.0.1";
 // $image = $_POST['image'];
 // Create connection
@@ -12,6 +13,38 @@ if(!mysqli_select_db($conn,'product_deal_india'))
 {
   echo "not selected";
 }
+
+if (isset($_POST['add_to_cart'])){
+     print_r($_POST['product_id']);
+    if(isset($_SESSION['cart'])){
+
+        $item_array_id = array_column($_SESSION['cart'], "product_id");
+
+        if(in_array($_POST['product_id'], $item_array_id)){
+            echo "<script>alert('Product is already added in the cart..!')</script>";
+            echo "<script>window.location = 'index1.php'</script>";
+        }else{
+
+            $count = count($_SESSION['cart']);
+            $item_array = array(
+                'product_id' => $_POST['product_id']
+            );
+
+            $_SESSION['cart'][$count] = $item_array;
+        }
+
+    }else{
+
+        $item_array = array(
+                'product_id' => $_POST['product_id']
+        );
+
+        // Create new session variable
+        $_SESSION['cart'][0] = $item_array;
+        print_r($_SESSION['cart']);
+    }
+}
+
 
 ?>
 
@@ -59,6 +92,7 @@ if(!mysqli_select_db($conn,'product_deal_india'))
           </div>
           <div>
             <div class="sign" id="Username">
+              <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
               <div>
                 <a  href="sellersignin.html">SELLER</a>
               </div>
@@ -68,6 +102,7 @@ if(!mysqli_select_db($conn,'product_deal_india'))
                 <div>
                   <a  href="signin.php">SIGN IN</a>
                 </div>
+
             </div>
           </div>
       </div>
@@ -104,7 +139,7 @@ if(!mysqli_select_db($conn,'product_deal_india'))
                 $image_src = "/webdevelopment/images/upload/".$imawge;
         ?>
 
-            <form method="post">
+            <form method="post" action="index1.php">
                             <div class="product" >
                               <div class="productimages">
                                 <img src="<?php echo $image_src; ?>" class="img-responsive"  /><br />
@@ -121,8 +156,9 @@ if(!mysqli_select_db($conn,'product_deal_india'))
                                    <span class="fa fa-star"></span>
                                    <span class="fa fa-star"></span>
                                  </div>
-
+                                 <input type="hidden" name="product_id" value="<?php echo $row['ID']; ?>" >
                                  <input type="submit" name="add_to_cart" style="margin-top:50px;" class="btn btn-success" value="Add to Cart" />
+
                             </div>
              </form>
              <br>

@@ -60,6 +60,7 @@ if(!mysqli_select_db($conn,'product_deal_india'))
           </div>
           <div>
             <div class="sign" id="Username">
+              <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
               <div class="">
                 <?php echo '<font color=orange> Welcome, </font> <b>'.$_SESSION['user'] ?>
                 </b>

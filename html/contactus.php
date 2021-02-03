@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +16,7 @@
   </div>
   <div class="row">
     <div class="column">
-      <form action="/action_page.php">
+      <form action="/webdevelopment/php/contactus.php" method="post">
         <label for="fname">First Name</label>
         <input type="text" id="fname" name="firstname" placeholder="Your name..">
         <label for="lname">Last Name</label>
@@ -36,7 +37,7 @@
         </select>
         <label for="subject">Subject</label>
         <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" name="submit">
       </form>
     </div>
   </div>

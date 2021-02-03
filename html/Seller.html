@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <title>Product Deal India | SELLER</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/webdevelopment/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/webdevelopment/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/webdevelopment/css/seller.css">
+
+    <!-- End layout styles -->
+    <style>
+    .topbar{
+      width: 100%;
+      height:24px;
+      background-color: gray;
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .container{
+      display: flex;
+      padding-top: 0px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      background-color: orange;
+    }
+    .abv{
+        background-color: red;
+    }
+    .sign{
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 20px;
+      background-color: gray;
+      height:34px;
+    }
+    </style>
+
+  </head>
+  <body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+['Task', 'Hours per Day'],
+['Work', 8],
+['Eat', 2],
+['TV', 4],
+['Gym', 2],
+['Sleep', 8]
+]);
+
+// Optional; add a title and set the width and height of the chart
+var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+// Display the chart inside the <div> element with id="piechart"
+var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+chart.draw(data, options);
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+
+	title:{
+		text:"Fortune 500 Companies by Country"
+	},
+	axisX:{
+		interval: 1
+	},
+	axisY2:{
+		interlacedColor: "rgba(1,77,101,.2)",
+		gridColor: "rgba(1,77,101,.1)",
+		title: "Number of Companies"
+	},
+	data: [{
+		type: "bar",
+		name: "companies",
+		axisYType: "secondary",
+		color: "#014D65",
+		dataPoints: [
+			{ y: 3, label: "Sweden" },
+			{ y: 7, label: "Taiwan" },
+			{ y: 5, label: "Russia" },
+			{ y: 9, label: "Spain" },
+			{ y: 7, label: "Brazil" },
+			{ y: 7, label: "India" },
+			{ y: 9, label: "Italy" },
+			{ y: 8, label: "Australia" },
+			{ y: 11, label: "Canada" },
+			{ y: 15, label: "South Korea" },
+			{ y: 12, label: "Netherlands" },
+			{ y: 15, label: "Switzerland" },
+			{ y: 25, label: "Britain" },
+			{ y: 28, label: "Germany" },
+			{ y: 29, label: "France" },
+			{ y: 52, label: "Japan" },
+			{ y: 103, label: "China" },
+			{ y: 134, label: "US" }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+
+    <div class="topbar">
+        <div class="title">
+          Seller Panel
+        </div>
+
+    </div>
+    <div class="sign">
+      <a  href=" index1.php">Logout</a>
+    </div>
+    <div class="container">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <div class="abv">
+                <li class="nav-item">
+                  <a class="nav-link" href="index (edited).html">
+                    <span class="menu-title">Dashboard</span>
+                  </a>
+                </li>
+              </div>
+              <li class="nav-item">
+                <a class="nav-link" href="#ui-basic">
+                  <span class="menu-title">Add Products</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#localhost">
+                  <span class="menu-title">Modify Products</span>
+                </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title">Remove Products</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title">Orders Recieved</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title">Messages</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title">Report</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#localhost">
+                <span class="menu-title"></span>
+              </a>
+            </li>
+
+            </ul>
+        </nav>
+            <div id="piechart"></div>
+            <div id="chartContainer" style="height: 370px; width: 30%;"></div>
+    </div>
+  </body>
+</html>
