@@ -1,4 +1,25 @@
 <?php
+$cookie_name = "username";
+$cookie_value = "kaushik";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+$cookie1_name = "password";
+$cookie1_value = "password@123";
+setcookie($cookie1_name, $cookie1_value, time() + (86400 * 30), "/");
+$cookie2_name = "noofclicks";
+
+
+if(isset($_COOKIE['noofclicks'])){
+    $cookie2_value = $_COOKIE['noofclicks'];
+    $cookie2_value++;
+    setcookie($cookie2_name, $cookie2_value, time() + (86400 * 30), "/");
+}
+else{
+  $cookie2_value = 0;
+  setcookie($cookie2_name, $cookie2_value, time() + (86400 * 30), "/");
+}
+
+?>
+<?php
 session_start();
 $servername = "127.0.0.1";
 // $image = $_POST['image'];
@@ -81,31 +102,77 @@ if (isset($_POST['add_to_cart'])){
 		background-position: 0% 50%;
 	}
 } */
+.advert{
+  display: flex;
+  padding-top: 40px;
+}
+.timer{
+  display: flex;
+  padding-left: 350px;
+  padding-top: 10px;
+  font-size: 30px;
+  color: orange;
+}
 </style>
     <title> Product deal India</title>
+    <!-- Google Analytics -->
+<script>
+function countClicks() {
+		ClickCount++;
+    setcookie($cookie_name, ClickCount, time() + (86400 * 30), "/");
+}
+
+
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-XXXXX-Y', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
   </head>
-  <body>
+  <body onload="startTime();">
     <div class="container1">
       <div class="flex-box-container-1">
           <div class="image">
             <img src="/webdevelopment/images/logo.jpeg" alt="logo" height="150" width="200">
           </div>
+          <div class="advert">
+
+
+          <div class="image">
+            <img id = "img1" src="/webdevelopment/images/2.jpg" alt="logo" height="150" width="600">
+          </div>
+          </div>
+          <!-- <div >
+            <img src="/webdevelopment/images/appl.png" alt="logo" height="150" width="200">
+          </div> -->
           <div>
             <div class="sign" id="Username">
-              <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
+              <div >
+                <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
+              </div>
+
               <div>
                 <a  href="sellersignin.html">SELLER</a>
               </div>
-                <div>
+                <!-- <div>
                   <a  href="mainsignup.html">SIGN UP</a>
-                </div>
+                </div> -->
                 <div>
-                  <a  href="signin.php">SIGN IN</a>
+                  <a  href="signin.php">LOGIN</a>
                 </div>
 
             </div>
           </div>
       </div>
+      <div class="timer">
+        <strong><p id="demo"></p></strong>
+      </div>
+
       <div class="searchbox">
         <div class="input-group">
             <div class="searchinput">
@@ -260,5 +327,65 @@ if (isset($_POST['add_to_cart'])){
       <!-- Copyright -->
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" integrity="sha256-qM7QTJSlvtPSxVRjVWNM2OfTAz/3k5ovHOKmKXuYMO4=" crossorigin="anonymous"></script>
+    <script language="javascript" type="text/javascript">
+var timerid = 0;
+var images = new Array(	"/webdevelopment/images/2.jpg",
+			"/webdevelopment/images/3.jpg",
+			"/webdevelopment/images/4.jpg","/webdevelopment/images/5.jpg","/webdevelopment/images/6.jpg","/webdevelopment/images/7.jpg");
+var countimages = 0;
+function startTime()
+{
+	if(timerid)
+	{
+		timerid = 0;
+	}
+	var tDate = new Date();
+
+	if(countimages == images.length)
+	{
+		countimages = 0;
+	}
+	if(tDate.getSeconds() % 5 == 0)
+	{
+		document.getElementById("img1").src = images[countimages];
+	}
+	countimages++;
+
+	timerid = setTimeout("startTime()", 1000);
+}
+</script>
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = "Deals of the Day  :" + hours + "h "
+  + minutes + "m " + seconds + "s Left";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=TRACKING_ID"></script>
+
+
   </body>
 </hmtl>

@@ -1,7 +1,7 @@
 .flex-box-container-1 {
   display: flex;
   justify-content: center;
-
+  
 }
 .flexbox2{
   display: flex;
@@ -123,7 +123,7 @@ box-sizing: border-box;
 
 
   .sign div{
-    padding-right: 40px;
+    padding-right: 20px;
   }
 
 .image{

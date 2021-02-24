@@ -1,14 +1,15 @@
 <html>
 <head>
 <link rel="stylesheet" href="/webdevelopment/css/signup.css">
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <title> Product deal India</title>
 <p><h1>Product Deal India &nbsp </h1></p>
 <p style="color:#ff8000";> TELL US ABOUT YOUR BUSINESS </p><br>
 <hr height="30%">
 </head>
 <body>
-<img class="relative" src="/webdevelopment/images/shop1.png" alt="Error Loading image" width="200"
-     height="140">
+<img class="relative" src="/webdevelopment/images/logo.jpeg" alt="Error Loading image" width="200"
+     height="130">
 <form action="/webdevelopment/php/seller_add.php" method="POST">
   <br>Username <br><input type="text" name="username"><br>
   <br>Firstname <br><input type="text" name="fname"><br>
@@ -48,7 +49,8 @@
       <span class="checkmark"></span>
     </label>
 
-  <input type="submit" value="Submit">
+   <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+    <input type="submit" value="Submit">
 
 </form>
 </body>

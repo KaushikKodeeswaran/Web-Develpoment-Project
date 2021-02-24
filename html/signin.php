@@ -30,12 +30,12 @@
 
 <h2 style="color:#ff8000">Please Login ..!!</h2>
 
-<form action="/webdevelopment/php/signin.php" method="POST">
+<!-- <form action="/webdevelopment/php/signin.php" method="get"> -->
   <div class="imgcontainer">
     <img src="/webdevelopment/images/logo.jpeg"  class="avatar">
   </div>
   <div class="container">
-    <form action="/webdevelopment/php/signin.php" method="POST">
+    <form action="/webdevelopment/php/signin.php" method="post">
       <label for="uname"><b>Username</b></label>
       <input type="text" id="user" name="user" placeholder="Enter Username" name="uname" required>
 
@@ -52,7 +52,7 @@
     <button type="button" class="cancelbtn">Cancel</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
-</form>
+<!-- </form> -->
 
 <?php
 if($_GET['Failed']==true)
