@@ -21,8 +21,9 @@ if($resultcheck > 0)
     if($uname == $username && $upass == $password)
     {
       //header("Location: success.php");
-      echo " successful";
+
       $check = 1;
+      header("Location: /webdevelopment/html/Seller.html");
     }
   }
   if($check!=1){

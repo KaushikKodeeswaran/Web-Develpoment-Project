@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/webdevelopment/css/signin.css">
+<link rel="stylesheet" href="/webdevelopment/css/mainsignup.css">
 <style>
 .alert {
   padding: 20px;
@@ -29,6 +30,7 @@
 <body>
 
 <h2 style="color:#ff8000">Please Login ..!!</h2>
+<a  class="right" href="mainsignup.html">Signup</a>
 
 <!-- <form action="/webdevelopment/php/signin.php" method="get"> -->
   <div class="imgcontainer">

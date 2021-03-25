@@ -12,7 +12,7 @@
     <h2>Contact Us</h2>
   </div>
   <div class="image" style="text-align:center">
-    <img src="/webdevelopment/imageslogo.jpeg" alt="logo" height="110" width="260">
+    <img src="/webdevelopment/images/logo.jpeg" alt="logo" height="110" width="260">
   </div>
   <div class="row">
     <div class="column">

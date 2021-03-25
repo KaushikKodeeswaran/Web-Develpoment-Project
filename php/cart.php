@@ -117,7 +117,7 @@ if (isset($_POST['remove'])){
                     </div>
                 </div>
             </div>
-
+<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed to checkout</button>
         </div>
     </div>
 </div>

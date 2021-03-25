@@ -113,6 +113,61 @@ if (isset($_POST['add_to_cart'])){
   font-size: 30px;
   color: orange;
 }
+/////////////////////////////////////////////////////////////////////////
+html {
+  height:100%;
+}
+
+body {
+  margin:0;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+.content {
+  background-color:rgba(255,255,255,.8);
+  border-radius:.25em;
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  /* box-sizing:border-box;
+  left:50%;
+  padding:10vmin;
+  /* position:fixed;
+  text-align:center;
+  top:50%;
+  transform:translate(-50%, -50%); */*/
+}
+
+h1 {
+  font-family:monospace;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
 </style>
     <title> Product deal India</title>
     <!-- Google Analytics -->
@@ -135,10 +190,14 @@ ga('send', 'pageview');
 <!-- End Google Analytics -->
   </head>
   <body onload="startTime();">
+    <div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div class="content">
     <div class="container1">
       <div class="flex-box-container-1">
           <div class="image">
-            <img src="/webdevelopment/images/logo.jpeg" alt="logo" height="150" width="200">
+            <img src="/webdevelopment/images/logo.png" alt="logo" height="150" width="200">
           </div>
           <div class="advert">
 
@@ -192,7 +251,137 @@ ga('send', 'pageview');
         </div>
       </div>
       <br>
+      <div class="container">
+          <div class="row">
 
+            <div class="col-xs-10 col-sm-15 col-md-4 col-lg-4">
+                <div class="listing listing-radius listing-success">
+                    <div class="shape">
+                        <div class="shape-text">50%</div>
+                    </div>
+                    <div class="listing-content">
+                        <h3 class="lead">Discount listing</h3>
+                        <p>Buy now - 50% off.</p>
+                    </div>
+                </div>
+            </div>
+              <div class="col-xs-10 col-sm-15 col-md-4 col-lg-4">
+                  <div class="listing listing-danger">
+                      <div class="shape">
+                          <div class="shape-text">hot</div>
+                      </div>
+                      <div class="listing-content">
+                          <h3 class="lead">Hot Offer</h3>
+                          <p>Best selling for this period.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xs-10 col-sm-15 col-md-4 col-lg-4">
+                  <div class="listing listing-danger">
+                      <div class="shape">
+                          <div class="shape-text">hot</div>
+                      </div>
+                      <div class="listing-content">
+                          <h3 class="lead">Hot Offer</h3>
+                          <p>Best selling for this period.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <style>
+.shape {
+    border-style: solid;
+    border-width: 0 70px 40px 0;
+    float: right;
+    height: 0px;
+    width: 0px;
+    -ms-transform: rotate(360deg); /* IE 9 */
+    -o-transform: rotate(360deg); /* Opera 10.5 */
+    -webkit-transform: rotate(360deg); /* Safari and Chrome */
+    transform: rotate(360deg);
+}
+.listing {
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 15px 0;
+    overflow: hidden;
+}
+.listing:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: rotate scale(1.1);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.shape {
+    border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
+}
+.listing-radius {
+    border-radius: 7px;
+}
+.listing-danger {
+    border-color: #d9534f;
+}
+.listing-danger .shape {
+    border-color: transparent #d9533f transparent transparent;
+}
+.listing-success {
+    border-color: #5cb85c;
+}
+.listing-success .shape {
+    border-color: transparent #5cb75c transparent transparent;
+}
+.listing-default {
+    border-color: #999999;
+}
+.listing-default .shape {
+    border-color: transparent #999999 transparent transparent;
+}
+.listing-primary {
+    border-color: #428bca;
+}
+.listing-primary .shape {
+    border-color: transparent #318bca transparent transparent;
+}
+.listing-info {
+    border-color: #5bc0de;
+}
+.listing-info .shape {
+    border-color: transparent #5bc0de transparent transparent;
+}
+.listing-warning {
+    border-color: #f0ad4e;
+}
+.listing-warning .shape {
+    border-color: transparent #f0ad4e transparent transparent;
+}
+.shape-text {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    right: -40px;
+    top: 2px;
+    white-space: nowrap;
+    -ms-transform: rotate(30deg); /* IE 9 */
+    -o-transform: rotate(360deg); /* Opera 10.5 */
+    -webkit-transform: rotate(30deg); /* Safari and Chrome */
+    transform: rotate(30deg);
+}
+.listing-content {
+    padding: 0 20px 10px;
+}
+.container{
+  display: flex;
+  padding-bottom: 20px;
+}
+</style>
       <div class="imagecontainer">
         <?php
           $sql = "select * from products ";
@@ -211,7 +400,7 @@ ga('send', 'pageview');
                               <div class="productimages">
                                 <img src="<?php echo $image_src; ?>" class="img-responsive"  /><br />
                               </div>
-                                 <br><br><br><br><br><br><h4 class="text-info"><?php echo $row["NAME"]; ?></h4>
+                                 <br><br><br><br><br><br><h4 class="text-info"><a href="/webdevelopment/html/clickproductopen.php?ID=<?php echo $row["ID"]; ?>" > <?php echo $row["NAME"]; ?></a></h4>
                                  <h4 class="text-danger">  ₹ <?php echo $row["PRICE"]; ?></h4>
                                  <!-- <input type="hidden" name="hidden_name" value="<?php echo $row["NAME"]; ?>" />
                                  <input type="hidden" name="hidden_price" value="<?php echo $row["PRICE"]; ?>" /> -->
@@ -386,6 +575,6 @@ var x = setInterval(function() {
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=TRACKING_ID"></script>
 
-
+<?php include "footer.php"; ?>
   </body>
 </hmtl>

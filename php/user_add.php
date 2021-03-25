@@ -27,7 +27,7 @@ if (!mysqli_query($conn, $sql)) {
   echo "not inserted";
 }
 else {
-  echo "inserted";
+  header("location:/webdevelopment/html/signin.php");
 };
 
 
