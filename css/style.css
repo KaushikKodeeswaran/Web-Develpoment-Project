@@ -58,8 +58,7 @@ Table OF Contents
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  background-image: linear-gradient(-134deg, #FFA62E 0%, #FB962E 20%, #F8852E 40%, #F3742D 60%, #EF612D 80%, #EA4D2C 100%);
-    
+  /* background-image: linear-gradient(-134deg, #45b9c2 0%, #2efbd5 20%, #1a7e9c 40%, #319ed0 60%, #16e8e4 80%, #26dcd4 100%); */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -491,7 +490,7 @@ textarea.input {
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
-  background-image:  linear-gradient(-135deg, #FF6CAB 0%, #F660BC 10%, #EC53CD 20%, #E045DE 30%, #D335EE 40%, #C323FF 50%, #B53AFF 60%, #A749FF 70%, #9854FF 80%, #865EFF 90%, #7366FF 100%);
+  /* background-image:  linear-gradient(-135deg, #FF6CAB 0%, #F660BC 10%, #EC53CD 20%, #E045DE 30%, #D335EE 40%, #C323FF 50%, #B53AFF 60%, #A749FF 70%, #9854FF 80%, #865EFF 90%, #7366FF 100%); */
 }
 
 .header-logo {
@@ -699,8 +698,8 @@ background: linear-gradient(to bottom, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, 
   display: block;
   width: 0%;
   height: 2px;
-  background: #00B4DB; 
-  background: -webkit-linear-gradient(to right, #0083B0, #00B4DB); 
+  background: #00B4DB;
+  background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
   background: linear-gradient(to right, #0083B0, #00B4DB);
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
@@ -1161,8 +1160,8 @@ background: linear-gradient(to bottom, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10
   left: 0px;
   top: 0px;
   width: 60px;
-    
-    
+
+
 }
 
 .product-widget .product-img>img {
@@ -2329,18 +2328,18 @@ background: linear-gradient(to bottom, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, 
 .login-col{
     background-image: linear-gradient(-135deg, #FF6CAB 0%, #F660BC 10%, #EC53CD 20%, #E045DE 30%, #D335EE 40%, #C323FF 50%, #B53AFF 60%, #A749FF 70%, #9854FF 80%, #865EFF 90%, #7366FF 100%);
     padding-bottom: 5%;
-    
-    
-        
-    
+
+
+
+
 }
 
 .login-pad{
     padding-top: 10%;
     padding-left: 35%;
     padding-bottom: 5%;
-    
-    
+
+
 }
 .login-pad2{
     padding-left: 7%;
@@ -2348,8 +2347,8 @@ background: linear-gradient(to bottom, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, 
 }
 .login-marg{
     margin-left: 2%;
-    
-        
+
+
 }
 .text-pad{
     padding-top: 5%;

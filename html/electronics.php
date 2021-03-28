@@ -1,5 +1,8 @@
 <?php
 session_start();
+?>
+<?php
+session_start();
 $servername = "127.0.0.1";
 // $image = $_POST['image'];
 // Create connection

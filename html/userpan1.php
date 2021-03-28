@@ -1,0 +1,69 @@
+<?php
+session_start();
+?>
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 04</title>
+    <meta charset="utf-8">
+    <style media="screen">
+      iframe{
+        Border:none;
+        width: 100%;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/webdevelopment/css1/style.css">
+  </head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<!-- <div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div> -->
+
+           <h1><a href="#" class="logo">User Panel</a></h1>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="useraccount.php" target ="iframe1"><span class="fa fa-home mr-3"></span> Account Details</a>
+<!--<iframe src="useraccount.html" width="100%" height="300">
+</iframe>-->
+          </li>
+          <li>
+              <a href="editaccdetail.php" target="iframe1" frameBorder="0"><span class="fa fa-user mr-3"></span> Manage Account</a>
+          </li>
+          <li>
+            <a href="differentorders.php" target="iframe1"><span class="fa fa-sticky-note mr-3"></span> Orders</a>
+          </li>
+          <li>
+            <a href="trackorder.html" target="iframe1"><span class="fa fa-sticky-note mr-3"></span> Track Orders</a>
+          </li>
+
+          <li>
+            <a href="logout.php"><span class="fa fa-paper-plane mr-3"></span> Logout</a>
+          </li>
+        </ul>
+
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+
+<iframe name="iframe1" src="useraccount.php" width="100%" height="100%" ></iframe>
+      </div>
+		</div>
+
+    <script src="/webdevelopment/js1/jquery.min.js"></script>
+    <script src="/webdevelopment/js1/popper.js"></script>
+    <script src="/webdevelopment/js1/bootstrap.min.js"></script>
+    <script src="/webdevelopment/js1/main.js"></script>
+  </body>
+</html>

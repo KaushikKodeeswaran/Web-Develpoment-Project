@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +60,8 @@
 <!-- </form> -->
 
 <?php
-if($_GET['Failed']==true)
+
+if(isset($_GET['Failed']))
 {
 ?>
 

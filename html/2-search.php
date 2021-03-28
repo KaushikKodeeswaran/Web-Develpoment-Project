@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 // (A) DATABASE CONFIG - CHANGE TO YOUR OWN!
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'product_deal_india');

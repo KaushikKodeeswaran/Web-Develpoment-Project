@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -99,23 +101,25 @@
                   if(!mysqli_select_db($conn,'product_deal_india'))
                   {
                     echo "not selected";
-                  }
+                  }$Values = array();
                   $sql = "select * from products";
                   $result = mysqli_query($conn,$sql);
                   while ($row = mysqli_fetch_array($result)){
                       foreach ($product_id as $id){
                           if ($row['ID'] == $id){
-
+                            $quantity = $_GET['quantityq'.$id];
+                            $Values[] = $quantity;
                             ?>
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                               <div>
                                 <h6 class="my-0"><?php echo $row['NAME'];?></h6>
                                 <small class="text-muted">Brief description</small>
                               </div>
-                              <span class="text-muted">Rs. <?php echo $row['PRICE'];?></span>
+                              <span class="text-muted">Rs. <?php echo ($row['PRICE']*$quantity);?></span>
                             </li>
                             <?php
                               $total = $total + (int)$row['PRICE'];
+
                           }
                       }
                   }
@@ -146,11 +150,18 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate method="post" action="billingaddress.php">
+          <?php foreach ($product_id as $id){ $a=0;$adate = date("Y-m-d H:i:s");?>
+
+          <input type="hidden" name="Sid" value="<?php echo $id; ?>">
+          <input type="hidden" name="Qty" value="<?php echo $Values[$a]; ?>">
+          <input type="hidden" name="ddate" value=<?php echo $adate; ?>>
+
           <div class="row g-3">
+          <?php }  $a++;?>
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <label for="firstName"  class="form-label">First name</label>
+              <input type="text" class="form-control" name="fname" id="firstName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -158,26 +169,15 @@
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="lname" id="lastName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
             </div>
 
             <div class="col-12">
-              <label for="username" class="form-label">Username</label>
-              <div class="input-group">
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-              <div class="invalid-feedback">
-                  Your username is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12">
               <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -185,7 +185,7 @@
 
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" name="add1" id="address" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -193,12 +193,12 @@
 
             <div class="col-12">
               <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+              <input type="text" class="form-control" name="add2" id="address2" placeholder="Apartment or suite">
             </div>
 
             <div class="col-md-5">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
+              <select class="form-select" name="country" id="country" required>
                 <option value="">Choose...</option>
                 <option>United States</option>
                 <option value="AFGHANISTAN">AFGHANISTAN</option>
@@ -219,7 +219,7 @@
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
+              <select class="form-select" name="state" id="state" required>
                 <option value="">Choose...</option>
                 <option>California</option>
               </select>
@@ -230,7 +230,7 @@
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
+              <input type="text" name="zip1" class="form-control" id="zip" placeholder="" required>
               <div class="invalid-feedback">
                 Zip code required.
               </div>
@@ -255,15 +255,19 @@
 
           <div class="my-3">
             <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+              <input id="credit" name="paymentMethod" value="cash" type="radio" class="form-check-input" checked required>
+              <label class="form-check-label" for="credit">Cash</label>
+            </div>
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" value="credit" type="radio" class="form-check-input" checked required>
               <label class="form-check-label" for="credit">Credit card</label>
             </div>
             <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+              <input id="debit" name="paymentMethod" value="debit" type="radio" class="form-check-input" required>
               <label class="form-check-label" for="debit">Debit card</label>
             </div>
             <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+              <input id="paypal" name="paymentMethod" value="paypal" type="radio" class="form-check-input" required>
               <label class="form-check-label" for="paypal">PayPal</label>
             </div>
           </div>

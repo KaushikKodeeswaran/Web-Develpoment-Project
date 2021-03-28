@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <head>
 		<meta charset="utf-8">
@@ -45,11 +48,7 @@
 
 
         }
-        #header {
-
-            background: #780206;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #061161, #780206);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #061161, #780206); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        /* near-gradient(to right, #061161, #780206); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ */
 
 
         }
@@ -178,10 +177,85 @@
 					{
 						echo "not selected";
 					}
+					if (isset($_POST['add_to_cart'])){
+					     // print_r($_POST['product_id']);
+					    if(isset($_SESSION['cart'])){
 
+					        $item_array_id = array_column($_SESSION['cart'], "product_id");
+					        print_r($item_array_id);
+					        print_r( $_SESSION['cart']);
+					        if(in_array($_POST['product_id'], $item_array_id)){
+					            echo "<script>alert('Product is already added in the cart..!')</script>";
+					            echo "<script>window.location = 'index1.php'</script>";
+					        }else{
+
+					            $count = count($_SESSION['cart']);
+					            $item_array = array(
+					                'product_id' => $_POST['product_id']
+					            );
+
+					            $_SESSION['cart'][$count] = $item_array;
+					        }
+
+					    }else{
+
+					        $item_array = array(
+					                'product_id' => $_POST['product_id']
+					        );
+
+					        // Create new session variable
+					        $_SESSION['cart'][0] = $item_array;
+					        print_r($_SESSION['cart']);
+					    }
+					}
 								$product_id = $_GET['ID'];
 
 
+								$sql1 = " SELECT * FROM ratingandreview WHERE Productid = $product_id";
+							  $result1 = mysqli_query($conn, $sql1);
+							  $numofratings = mysqli_num_rows($result1);
+
+								$sql2 = " SELECT * FROM ratingandreview WHERE Productid = $product_id AND Star=1";
+							  $result2 = mysqli_query($conn, $sql2);
+							  $numofone = mysqli_num_rows($result2);
+								$one = 1 * $numofone;
+
+
+
+
+
+								$sql3 = " SELECT * FROM ratingandreview WHERE Productid = $product_id AND Star=2";
+							  $result3 = mysqli_query($conn, $sql3);
+							  $numoftwo = mysqli_num_rows($result3);
+								$two = 2 * $numoftwo;
+
+								$sql4 = " SELECT * FROM ratingandreview WHERE Productid = $product_id AND Star=3";
+							  $result4 = mysqli_query($conn, $sql4);
+							  $numofthree = mysqli_num_rows($result4);
+								$three = 3 * $numofthree;
+
+								$sql5 = " SELECT * FROM ratingandreview WHERE Productid = $product_id AND Star=4";
+							  $result5 = mysqli_query($conn, $sql5);
+							  $numoffour = mysqli_num_rows($result5);
+								$four = 4 * $numoffour;
+
+								$sql6 = " SELECT * FROM ratingandreview WHERE Productid = $product_id AND Star=5";
+							  $result6 = mysqli_query($conn, $sql6);
+							  $numoffive = mysqli_num_rows($result6);
+								$five = 5 * $numoffive;
+
+								$average=$one+$two+$three+$four+$five;
+								$AVERAGE1 =$numofone+$numoftwo+$numofthree+$numoffour+$numoffive;
+								$AVERAGE = $average / $AVERAGE1;
+
+								$pg5=($numoffive/$average)*100;
+								$pg4=($numoffour/$average)*100;
+								$pg3=($numofthree/$average)*100;
+								$pg2=($numoftwo/$average)*100;
+								$pg1=($numofone/$average)*100;
+
+
+								$date = date("Y-m-d H:i:s");
 								$sql = " SELECT * FROM products WHERE ID = $product_id";
 
 								$result = mysqli_query($conn, $sql);
@@ -251,7 +325,7 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o"></i>
 								</div>
-								<a class="review-link" href="#review-form">10 Review(s) | Add your review</a>
+								<a class="review-link" href="#review-form">'.$numofratings.' Review(s) </a>
 							</div>
 							<div>
 								<h3 class="product-price">Rs.'.$row['PRICE'].'<del class="product-old-price"></del></h3>
@@ -284,8 +358,13 @@
 									</div>
 								</div>
 								<div class="btn-group" style="margin-left: 25px; margin-top: 15px">
-								<button class="add-to-cart-btn" pid="'.$row['ID'].'"  id="product" ><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                </div>
+								<input type="hidden" name="product_id" value='.$product_id.' >
+								<form method="post" action="index1.php">
+								 <input type="hidden"  name="product_id" value="'.$row['ID'].'" >
+								 <input type="hidden"  name="product" value="'.$row['ID'].'" >
+								 <input type="submit" name="add_to_cart" style="margin-top:50px;" class="add-to-cart-btn" value="Add to Cart" />
+
+										</form>            </div>
 
 
 							</div>
@@ -330,9 +409,9 @@
 						<div id="product-tab">
 							<!-- product tab nav -->
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 
-								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+
+								<li><a data-toggle="tab" href="#tab3">Reviews ('.$numofratings.')</a></li>
 							</ul>
 							<!-- /product tab nav -->
 
@@ -342,7 +421,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Description from database</p>
+
 										</div>
 									</div>
 								</div>
@@ -365,7 +444,7 @@
 										<div class="col-md-3">
 											<div id="rating">
 												<div class="rating-avg">
-													<span>4.5</span>
+													<span>'.$AVERAGE.'</span>
 													<div class="rating-stars">
 														<i class="fa fa-star"></i>
 														<i class="fa fa-star"></i>
@@ -384,9 +463,9 @@
 															<i class="fa fa-star"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style="width: '.$pg5.'%;"></div>
 														</div>
-														<span class="sum">3</span>
+														<span class="sum">'.$numoffive.'</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -397,9 +476,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style="width: '.$pg4.'%;"></div>
 														</div>
-														<span class="sum">2</span>
+														<span class="sum">'.$numoffour.'</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -410,9 +489,9 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+															<div style="width: '.$pg3.'%;"></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum">'.$numofthree.'</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -423,9 +502,10 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+														<div style="width: '.$pg2.'%;"></div>
+
 														</div>
-														<span class="sum">0</span>
+														<span class="sum">'.$numoftwo.'</span>
 													</li>
 													<li>
 														<div class="rating-stars">
@@ -436,88 +516,27 @@
 															<i class="fa fa-star-o"></i>
 														</div>
 														<div class="rating-progress">
-															<div></div>
+															<div style="width: '.$pg1.'%;"></div>
 														</div>
-														<span class="sum">0</span>
+														<span class="sum">'.$numofone.'</span>
 													</li>
 												</ul>
 											</div>
 										</div>
 										<!-- /Rating -->
 
-										<!-- Reviews -->
-										<div class="col-md-6">
-											<div id="reviews">
-												<ul class="reviews">
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>good</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">User 2</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Nice product</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">User 3</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>testing third</p>
-														</div>
-													</li>
-												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
-											</div>
-										</div>
-										<!-- /Reviews -->
+
 
 										<!-- Review Form -->
-										<div class="col-md-3 mainn">
+										<div class="col-md-3 ">
 											<div id="review-form">
-												<form class="review-form">
-													<input class="input" type="text" placeholder="Your Name">
-													<input class="input" type="email" placeholder="Your Email">
-													<textarea class="input" placeholder="Your Review"></textarea>
+												<form class="review-form" method="post" action="reviewsandratings.php">
+													<textarea class="input" name="review" placeholder="Your Review"></textarea>
 													<div class="input-rating">
+													<input type="hidden" name="productid" value='.$product_id.'>
+													<input type="hidden" name="date" value='.$date.'>
 														<span>Your Rating: </span>
+
 														<div class="stars">
 															<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
 															<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
@@ -526,26 +545,92 @@
 															<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
 														</div>
 													</div>
-													<button class="primary-btn">Submit</button>
+													<button class="primary-btn" name="submit">Submit</button>
 												</form>
 											</div>
 										</div>
 										<!-- /Review Form -->
-									</div>
-								</div>
-								<!-- /tab3  -->
-							</div>
-							<!-- /product tab content  -->
-						</div>
-					</div>
-					<!-- /product tab -->
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
+                 ';}
 
-                 ';} ?>
+
+								 echo'<div class="col-md-6">
+									 <div id="reviews">
+										 <ul class="reviews">';
+								 $sql1 = " SELECT * FROM ratingandreview WHERE Productid = $product_id";
+
+								 $result1 = mysqli_query($conn, $sql1);
+
+
+									 while($row1 = mysqli_fetch_array($result1))
+									 {
+echo'
+
+													<li>
+														<div class="review-heading">
+															<h5 class="name">'.$row1['Customerid'].'</h5>
+															<p class="date">'.$row1['date'].'</p>';
+															$ratingcur=$row1['Star'];
+														if($ratingcur == 1){echo '
+														<div class="review-rating">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o empty"></i>
+															<i class="fa fa-star-o empty"></i>
+															<i class="fa fa-star-o empty"></i>
+															<i class="fa fa-star-o empty"></i>
+														</div>';
+													}
+													if($ratingcur == 2){echo '
+													<div class="review-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													<i class="fa fa-star-o empty"></i>
+													<i class="fa fa-star-o empty"></i>
+														<i class="fa fa-star-o empty"></i>
+													</div>';
+												}
+												if($ratingcur == 3){echo '
+												<div class="review-rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o empty"></i>
+													<i class="fa fa-star-o empty"></i>
+												</div>';
+											}
+											if($ratingcur == 4){echo '
+											<div class="review-rating">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-o empty"></i>
+											</div>';
+										}
+										if($ratingcur == 5){echo '
+										<div class="review-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>';
+									}
+
+															echo'
+														</div>
+														<div class="review-body">
+															<p>'.$row1['Review'].'</p>
+														</div>
+													</li>
+													';}echo'
+												</ul>
+
+											</div>
+										</div>
+										<!-- /Reviews --> ';
+
+								 ?>
+
 							 </footer>
 							 <script src="/webdevelopment/js/jquery.min.js"></script>
 							 <script src="/webdevelopment/js/bootstrap.min.js"></script>

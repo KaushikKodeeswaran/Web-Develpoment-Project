@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <title>Product Deal India | SELLER</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/webdevelopment/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/webdevelopment/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/webdevelopment/css/seller.css">
+
+    <!-- End layout styles -->
+    <style>
+    .topbar{
+      width: 100%;
+      height:24px;
+      background-color: gray;
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    .container{
+      display: flex;
+      padding-top: 0px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      background-color: orange;
+    }
+    .abv{
+        background-color: red;
+    }
+    .sign{
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 20px;
+      background-color: gray;
+      height:34px;
+    }
+    </style>
+
+  </head>
+  <body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+['Task', 'Hours per Day'],
+['Electronics', 8],
+['Sports', 2],
+['Home&furniture', 4],
+['Clothing', 2],
+['Books', 8]
+]);
+
+// Optional; add a title and set the width and height of the chart
+var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+// Display the chart inside the <div> element with id="piechart"
+var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+chart.draw(data, options);
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+window.onload = function () {
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+
+
+  	axisX:{
+  		interval: 1
+  	},
+  	axisY2:{
+  		interlacedColor: "rgba(1,77,101,.2)",
+  		gridColor: "rgba(1,77,101,.1)",
+  		title: "INCOME"
+  	},
+  	data: [{
+  		type: "bar",
+  		name: "companies",
+  		axisYType: "secondary",
+  		color: "#014D65",
+  		dataPoints: [
+  			{ y: 3, label: "Monday" },
+  			{ y: 7, label: "Tuesday" },
+  			{ y: 5, label: "Wednesday" },
+  			{ y: 9, label: "Thursday" },
+  			{ y: 7, label: "Friday" },
+  			{ y: 7, label: "Saturday" },
+  			{ y: 9, label: "Sunday" },
+
+  		]
+  	}]
+  });
+  chart.render();
+
+}
+</script>
+
+        </nav>
+            <div id="piechart"></div>
+            <div id="chartContainer" style="height: 370px; width: 30%;"></div>
+    </div>
+  </body>
+</html>

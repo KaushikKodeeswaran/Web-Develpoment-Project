@@ -566,7 +566,14 @@ ul {
   width: 90px;
   height: 100px;
 }
-
+.logout1
+{
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 90px;
+  height: 100px;
+}
 
 @media (max-width: 426px) {
     .container {margin-top:0px !important;}
@@ -722,7 +729,12 @@ ul {
  text-align: right;
  border: 7px ; " alt="logo">
 <!-- <span class="logout" <a </span> -->
- <a href="#" class="logout" style="float:right">LOGOUT</a>
+
+<div class="logout1">
+  <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
+</div>
+
+
 </div>
 
 <div class="topnav">

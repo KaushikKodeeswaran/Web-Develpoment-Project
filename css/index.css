@@ -1,7 +1,7 @@
 .flex-box-container-1 {
   display: flex;
   justify-content: center;
-  
+
 }
 .flexbox2{
   display: flex;
@@ -55,7 +55,7 @@
 }
 
 .flex-box-container-1 div{
-  padding-left: 30;
+  padding-right: 10;
 }
 
 .container1{

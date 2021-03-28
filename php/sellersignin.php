@@ -1,5 +1,6 @@
 <?php
 // Create connection
+session_start();
 $conn = mysqli_connect('127.0.0.1', 'root', '','product_deal_india');
 // Check connection
 if (!$conn) {
@@ -18,12 +19,15 @@ if($resultcheck > 0)
   while ($row = mysqli_fetch_assoc($result)) {
     $uname = $row['USERNAME'];
     $upass = $row['PASSWORD'];
+    $id = $row['ID'];
     if($uname == $username && $upass == $password)
     {
       //header("Location: success.php");
-
+      echo "kaushiki";
+      $_SESSION['suser']=$uname;
+      $_SESSION['sid'] =$id;
       $check = 1;
-      header("Location: /webdevelopment/html/Seller.html");
+      header("Location: /webdevelopment/html/sellerpanel.php");
     }
   }
   if($check!=1){

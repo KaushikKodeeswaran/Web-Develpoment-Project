@@ -19,10 +19,13 @@ if($resultcheck > 0)
   while ($row = mysqli_fetch_assoc($result)) {
     $uname = $row['username'];
     $upass = $row['PASSWORD'];
+    $id = $row['ID'];
     if($uname == $username && $upass == $password)
     {
       $_SESSION['user']=$uname;
-      header("Location: /webdevelopment/html/aindex.php");
+
+      $_SESSION['id'] =$id;
+      header("Location: /webdevelopment/html/index1.php");
       $check = 1;
     }
   }

@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 $cookie_name = "username";
 $cookie_value = "kaushik";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
@@ -20,7 +23,7 @@ else{
 
 ?>
 <?php
-session_start();
+
 $servername = "127.0.0.1";
 // $image = $_POST['image'];
 // Create connection
@@ -36,11 +39,12 @@ if(!mysqli_select_db($conn,'product_deal_india'))
 }
 
 if (isset($_POST['add_to_cart'])){
-     print_r($_POST['product_id']);
+     // print_r($_POST['product_id']);
     if(isset($_SESSION['cart'])){
 
         $item_array_id = array_column($_SESSION['cart'], "product_id");
-
+        print_r($item_array_id);
+        print_r( $_SESSION['cart']);
         if(in_array($_POST['product_id'], $item_array_id)){
             echo "<script>alert('Product is already added in the cart..!')</script>";
             echo "<script>window.location = 'index1.php'</script>";
@@ -63,6 +67,10 @@ if (isset($_POST['add_to_cart'])){
         // Create new session variable
         $_SESSION['cart'][0] = $item_array;
         print_r($_SESSION['cart']);
+    }
+    if(isset($_POST['product'])){
+      $ppiidd=$_POST['product'];
+      header("location:clickproductopen.php?ID=$ppiidd");
     }
 }
 
@@ -142,7 +150,47 @@ body {
 .bg3 {
   animation-duration:5s;
 }
+/* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 .content {
   background-color:rgba(255,255,255,.8);
   border-radius:.25em;
@@ -215,14 +263,23 @@ ga('send', 'pageview');
                 <?php require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php'); ?>
               </div>
 
-              <div>
-                <a  href="sellersignin.html">SELLER</a>
-              </div>
-                <!-- <div>
-                  <a  href="mainsignup.html">SIGN UP</a>
-                </div> -->
-                <div>
-                  <a  href="signin.php">LOGIN</a>
+              <?php
+                  if (isset($_SESSION['user'])) {
+                       echo '<div><font color=orange> Welcome, </font> <b>'.$_SESSION['user'];
+                       echo '</div><div><a  href="userpan1.php">ACCOUNT</a></div>';
+                       echo '<div><a  href="logout.php">Logout</a></div><div>';
+                    }
+                    else {
+                      echo '<div>
+                        <a  href="sellersignin.html">SELLER</a>
+                      </div>
+                        <div>
+                      <a  href="signin.php">LOGIN</a>';
+                    }
+                    ?>
+
+                  <!-- <div class="dropdownn"> -->
+
                 </div>
 
             </div>
@@ -287,6 +344,8 @@ ga('send', 'pageview');
                       </div>
                   </div>
               </div>
+
+
           </div>
       </div>
       <style>

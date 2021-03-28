@@ -1,12 +1,28 @@
 <?php
 
 session_start();
+?>
+<script>
+function plus($id){
+  var userInput = document.getElementById("quantity"+$id).value;
+if(userInput<9){
+  userInput = parseInt(userInput) + 1;
+}
+  document.getElementById("quantity"+$id).value = userInput;
+}
+function minus($id){
+  var userInput = document.getElementById("quantity"+$id).value;
+  if(parseInt(userInput)!=1){
+  userInput = parseInt(userInput - 1);}
+  document.getElementById("quantity"+$id).value = userInput;
+}
 
+</script><?php
 require_once (realpath($_SERVER["DOCUMENT_ROOT"])."/webdevelopment/php/CreateDb.php");
 require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/component.php');
 
 
-if (isset($_POST['remove'])){
+if (isset($_GET['action'])){
   if ($_GET['action'] == 'remove'){
       foreach ($_SESSION['cart'] as $key => $value){
           if($value["product_id"] == $_GET['id']){
@@ -14,7 +30,7 @@ if (isset($_POST['remove'])){
               echo "<script>alert('Product has been Removed...!')</script>";
               echo "<script>window.location = 'cart.php'</script>";
           }
-      }
+       }
   }
 }
 
@@ -43,7 +59,7 @@ if (isset($_POST['remove'])){
 <?php
     require_once (realpath($_SERVER["DOCUMENT_ROOT"]).'/webdevelopment/php/header.php');
 ?>
-
+<form action="/webdevelopment/html/checkout.php" method="get">
 <div class="container-fluid">
     <div class="row px-5">
         <div class="col-md-7">
@@ -116,8 +132,9 @@ if (isset($_POST['remove'])){
                             ?></h6>
                     </div>
                 </div>
-            </div>
-<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed to checkout</button>
+            </div><a href="/webdevelopment/html/checkout.php">
+<button  class="w-100 btn btn-primary btn-lg" type="submit">Proceed to checkout</button></a>
+</form>
         </div>
     </div>
 </div>

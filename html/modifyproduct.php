@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,26 +70,9 @@
 </head>
 <body>
 
-  <div class="topbar123">
-      <div class="title">
-        <strong> Seller Panel</strong>
-      </div>
-
-  </div>
-  <div class="sign123">
-  <div>
-    <a  href=" index1.php" style="text-decoration: none;">Dashboard&#x20;&#x20;&#x20;&#x20;</a>
-  </div>
-  <div >
-    <a  href=" index1.php" style="text-decoration: none;">Logout</a>
-  </div>
-</div>
-  <div class="top">
-</div >
-
-<div class="color123">
-  <h2 style="text-align:center">Product / Modify Product</h2>
-</div>
+<body>
+<center>
+ <h1> Modify Products</h1></center>
 
 
 

@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 $servername = "127.0.0.1";
 // $image = $_POST['image'];
 echo "kaushik";
